@@ -1,0 +1,6 @@
+pyzmq
+zmq
+#获取zmq
+pip install zmq
+#获取pyzmq
+pip install pyzmq
