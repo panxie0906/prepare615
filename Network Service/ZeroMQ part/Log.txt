@@ -1,4 +1,10 @@
 2017.08.21
-多topic的server-client的编写
+订阅发布模式下，多topic的server-client的编写
 请求回应模式的server-client的编写
 分topic策略，这里将策略用一个.py 文件来写
+
+多线程参照：
+http://www.cnblogs.com/fnng/p/3670789.html
+订阅发布模式参照：
+http://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/patterns/pubsub.html
+http://iyuan.iteye.com/blog/973013
