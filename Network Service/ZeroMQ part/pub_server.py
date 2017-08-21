@@ -23,5 +23,5 @@ while True:
     topic = random.randrange(9999,10005)
     messageData = random.randrange(1,125)-80
     print("the topic is %d, and the messageData is %d"%(topic,messageData))
-    socket.send("%d %d"%(topic,messageData))
+    socket.send_string("%d %d"%(topic,messageData))
     time.sleep(1)

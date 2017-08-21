@@ -32,7 +32,7 @@ This is usually set via socketoption
 '''
 topics = ["10001","10002"]
 for topic in topics:
-    socket.setsockopt(zmq.SUBSCRIBE,topic)
+    socket.setsockopt_string(zmq.SUBSCRIBE,topic)
 
 # try five times to verify the code   
 for updates in range(5):
