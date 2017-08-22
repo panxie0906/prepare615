@@ -13,11 +13,21 @@ def read_xml(xml_path):
     #root = ET.fromstring(xml_path) equals to the following two lines of code
     tree = ET.parse(xml_path)
     root = tree.getroot()
+    print(root.tag,"  ",root.attrib)
     return root
 
 def xml_to_dic(root):
     dict_result = {}
     
+    '''
+    itera = root.iter()
+    while True:
+        try:
+            i = itera.next()
+            print(i)
+        except StopIteration
+        break
+    '''
     for key,value in enumerate(root):
         dict_init = {}
         list_init = []

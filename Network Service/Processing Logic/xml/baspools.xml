@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<baspools>
+<baspools ip="1111111"  id="12345">
         <bas>
                 <basprovider>0</basprovider>
                 <portal_version>

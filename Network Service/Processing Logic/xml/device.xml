@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--每个测试服务节点在硬件扫描结束后向主控反馈本节点硬件资源情况-->
+<ServiceNode ip="172.129.0.10">
+  <!--422总线类型：返回通道总数及各通道对应的端口号-->
+  <Bus type="RS422">
+    <Device name="NI8431/8" id="" channelsum="8">
+      <Description>这是一张8通道422板卡，用于仿真MFD与DCMP之间的数据通道</Description>
+      <Parameters name="BaudRate" range="1200,2400,4800,9600,19200,38400,115200"></Parameters>
+      <Parameters name="DataBits" range="5,6,7,8"></Parameters>
+      <Parameters name="StopBits" range="1,2"></Parameters>
+      <Parameters name="Parity"   range="ODD,EVEN,NONE"></Parameters>
+      <Channel name="通道1" com="3" remark="RMFD-DCMP通道"></Channel>
+      <Channel name="通道2" com="4" remark="FMFD-DCMP通道"></Channel>
+      <Channel name="通道4" com="6" remark=""></Channel>
+      <Channel name="通道3" com="5" remark="备注"></Channel>
+      <Channel name="通道5" com="7" remark=""></Channel>
+      <Channel name="通道6" com="8" remark=""></Channel>
+      <Channel name="通道7" com="9" remark=""></Channel>
+      <Channel name="通道8" com="10" remark=""></Channel>
+    </Device>
+    <Device name="NI8431/2" id="" channelsum="2">
+      <Description>这是一张2通道422板卡，用于仿真UFCP与DCMP之间的数据通道</Description>
+      <Parameters name="BaudRate" range="1200,2400,4800,9600,19200,38400,115200"></Parameters>
+      <Parameters name="DataBits" range="5,6,7,8"></Parameters>
+      <Parameters name="StopBits" range="1,2"></Parameters>
+      <Parameters name="Parity"   range="ODD,EVEN,NONE"></Parameters>
+      <!--同一种总线类型可能有多块板卡-->
+      <Channel name="通道1" com="11" remark=""></Channel>
+      <Channel name="通道2" com="12" remark=""></Channel>
+    </Device>
+  </Bus>
+
+  <!--1553总线类型：返回板卡类型及板卡编号、通道类型及通道号-->
+  <Bus type="1553B">
+    <Device name="PMC-1553" mode="ADT_PRODUCT_PMC1553" id="ADT_DEVID_BOARDNUM_01" num="2">
+      <Description>双通道1553板卡，ch1用于RT仿真，ch2用于BM监控</Description>
+      <Channel name="通道1" type="ADT_DEVID_CHANNELTYPE_1553" id="ADT_DEVID_CHANNELNUM_01" remark="">
+        <BUS_A id="1553-board1-ch1-busA"></BUS_A>
+        <BUS_B id="1553-board1-ch1-busB"></BUS_B>
+      </Channel>
+      <Channel name="通道2" type="ADT_DEVID_CHANNELTYPE_1553" id="ADT_DEVID_CHANNELNUM_02" remark="">
+        <BUS_A id="1553-board1-ch2-busA"></BUS_A>
+        <BUS_B id="1553-board1-ch2-busB"></BUS_B>
+      </Channel>
+    </Device>
+  </Bus>
+
+  <Bus type="Switches">
+    <!--非总线类型，沿用节点名称bus-->
+    <Device name="NI2570" id="Dev1" mode="2570/40-SPDT" num="40">
+      <Description>开关量板卡</Description>
+    </Device>
+  </Bus>
+
+  <Bus type="Analog">
+    <Device name="NI6733" id="Dev2" num="8">
+      <Description>模拟量输出板卡</Description>
+      <Channel name="通道0" id="Dev2/p0" minVal="-5" maxVal="10" remark=""></Channel>
+      <Channel name="通道1" id="Dev2/p1" minVal="-5" maxVal="10" remark=""></Channel>
+      <Channel name="通道2" id="Dev2/p2" minVal="-5" maxVal="10" remark=""></Channel>
+      <Channel name="通道3" id="Dev2/p3" minVal="-5" maxVal="10" remark=""></Channel>
+      <Channel name="通道4" id="Dev2/p4" minVal="-5" maxVal="10" remark=""></Channel>
+      <Channel name="通道5" id="Dev2/p5" minVal="-5" maxVal="10" remark=""></Channel>
+      <Channel name="通道6" id="Dev2/p6" minVal="-5" maxVal="10" remark=""></Channel>
+      <Channel name="通道7" id="Dev2/p7" minVal="-5" maxVal="10" remark=""></Channel>
+    </Device>
+  </Bus>
+</ServiceNode>
+

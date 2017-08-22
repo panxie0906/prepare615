@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Project name="XXK-15显示控制管理系统" version="1.00" id="XXK15-DCMS-ICD">
+  <Products name="XKG-15显示控制管理处理机" version="1.00" id="XXK15-DCMP-ICD">
+    <Bus type="RS422">
+      <!--422长度以字节为单位，消息类型分为周期periodic/事件aperiodic，周期以ms为单位，事件型消息period属性填0-->
+      <Message name="保活报文" mode="periodic" period="500" sour="显示控制管理处理机" dest="多功能显示器" length="9" id="RS422-DCMP-MFD-1">
+        <Signal name="帧头标识符" length="4" start="0" end="3">
+          <Domain name="帧头标识符" type="unsigned int" startbits="0" endbits="31" remark="固定填写0x100031b"></Domain>
+        </Signal>
+        <Signal name="发布者ID" length="1" start="4" end="4">
+          <Domain name="发布者ID" type="byte" startbits="0" endbits="7" remark="00=战术处理机 01=数据记录仪"></Domain>
+        </Signal>
+        <Signal name="接收者ID" length="1" start="5" end="5">
+          <Domain name="接收者ID" type="byte" startbits="0" endbits="7" remark="00=战术处理机 01=数据记录仪"></Domain>
+        </Signal>
+        <Signal name="工作状态" length="2" start="6" end="7">
+          <Domain name="处理机工作状态" type="byte" startbits="0" endbits="7" remark="0x00=正常 0x01=备份"></Domain>
+          <Domain name="记录仪工作状态" type="byte" startbits="8" endbits="15" remark="0x00=正常 0x01=备份"></Domain>
+        </Signal>
+        <Signal name="CRC校验" length="1" start="8" end="8">
+          <Domain name="CRC校验" type="byte" startbits="0" endbits="7" remark="校验范围不包括帧头标识符"></Domain>
+        </Signal>
+      </Message>
+    </Bus>
+    <Bus type="1553B">
+      <!--1553长度以字（short，2字节）为单位-->
+      <Message name="ITPS下传状态数据块" mode="RT-BC" length="10" id="1553B-ITPS-FC-1">
+        <Signal name="控制指令回报+工作模式" length="1" start="0" end="0">
+          <Domain name="处理机工作模式" type="unsigned short" startbits="0" endbits="3" remark="0000-不用；0001=正常；0002=开始自检"></Domain>
+          <Domain name="记录仪工作模式" type="unsigned short" startbits="4" endbits="7" remark="正常:0100；未就绪：0101；（未授时或未收到架次信息）；开始自检：0001；"></Domain>
+          <Domain name="指令回报" type="unsigned short" startbits="8" endbits="15" remark=""></Domain>
+        </Signal>
+        <Signal name="融合状态" length="2"  start="1" end="2">
+          <Domain name="融合模式" type="unsigned short" startbits="0" endbits="3" remark="bit0-bit1：00=NA，01=态势融合，10=目指融合，11未融合" ></Domain>
+          <Domain name="目指融合源" type="unsigned short" startbits="4" endbits="7" remark="Bit2：0=NA,1=选择雷达数据；Bit3：0=NA,1=选择光电数据" ></Domain>
+          <Domain name="软件版本号" type="unsigned short" startbits="8" endbits="15" remark="bit15：0=1,1=2；bit14-bit8:0-99，lsb=1；" ></Domain>
+        </Signal>
+        <Signal name="处理机状态" length="2" start="3" end="4">
+          <Domain name="带宽状态" type="unsigned short" startbits="0" endbits="1" remark="bit1-bit0:00=NA,01=2m，10=4m，11=8m"></Domain>
+          <Domain name="版本号归属" type="unsigned short" startbits="2" endbits="3" remark="bit4-bit2：000：主控软件；001：记录仪管理软件；010：视频处理"></Domain>
+          <Domain name="构型状态" type="unsigned short" startbits="4" endbits="7" remark="00=na，01=构型1, 10=构型2, 11=构型3."></Domain>
+          <Domain name="主控软件版本号" type="unsigned short" startbits="8" endbits="15" remark=""></Domain>
+        </Signal>
+        <Signal name="记录仪状态" length="2" start="5" end="6">
+          <Domain name="记录状态" type="unsigned short" startbits="0" endbits="5" remark="Bit0:1=记录雷达视频；Bit1:1=记录红外视频；Bit2:1=记录可见光视频； Bit3:1=记录数码照片；Bit4：1=记录雷侦；Bit5：1=记录通侦；"></Domain>
+          <Domain name="回放状态" type="unsigned short" startbits="6" endbits="7" remark="回放状态： 00=NA;01=回放雷达；10=回放可见光；11=回放红外" ></Domain>
+          <Domain name="记录仪端口状态" type="unsigned short" startbits="8" endbits="15" remark="记录仪端口状态： bit8~9：00代表端口1无数据；01代表端口1有数据； bit10~11：00代表端口2无数据；01代表端口2有数据； 
+                bit12~13：00代表端口3无数据；01代表端口3有数据； bit14~15：00代表端口4无数据；01代表端口4有数据；" ></Domain>
+        </Signal>
+        <Signal  name="信息下传状态" length="1" start="7" end="7">
+          <Domain name="信息下传状态" type="unsigned short" startbits="0" endbits="15" remark="bit0：下传AIS数据；bit1：下传ADS-B数据；bit2：下传雷侦数据；bit3：下传通侦数据；bit4:下传雷达有损压缩视频；
+                bit5：下传红外有损压缩视频；bit6下传可见光有损压缩视频；bit7：下传数码照片；bit8：下传检索视频；bit9：下传态势融合数据；bit10：下传雷达数据" ></Domain>
+        </Signal>
+        <Signal name="故障信息" length="2" start="8" end="9">
+          <Domain name="记录仪故障信息" type="unsigned short" startbits="0" endbits="15" remark="" ></Domain>
+          <Domain name="处理机故障信息" type="unsigned short" startbits="16" endbits="31" remark="" ></Domain>
+        </Signal>
+      </Message>
+    </Bus>
+  </Products>
+  <Products name="XXX记录仪" version="1.00" id="XXX-ICD">
+    <Bus type="RS422">
+      <!--............-->
+    </Bus>
+  </Products>
+</Project>
