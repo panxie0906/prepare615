@@ -8,3 +8,10 @@ http://www.cnblogs.com/fnng/p/3670789.html
 订阅发布模式参照：
 http://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/patterns/pubsub.html
 http://iyuan.iteye.com/blog/973013
+
+2017.08.24 完成单服务器多客户端连接，采用python socketserver的多线程方式。
+遇到错误：typeerror a bytes-like object is required not str
+解决方法：http://blog.csdn.net/yexiaohhjk/article/details/68066843
+涉及到bytes和str的转换函数encode（），decode（）
+str通过encode（）编码为指定的bytes
+bytes通过decode（）转换为str
