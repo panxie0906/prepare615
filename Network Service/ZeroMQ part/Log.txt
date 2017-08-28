@@ -10,8 +10,11 @@ http://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/patterns/pubsub.ht
 http://iyuan.iteye.com/blog/973013
 
 2017.08.24 完成单服务器多客户端连接，采用python socketserver的多线程方式。
-遇到错误：typeerror a bytes-like object is required not str
+遇到错误：TypeError: a bytes-like object is required, not ‘str’ 
 解决方法：http://blog.csdn.net/yexiaohhjk/article/details/68066843
 涉及到bytes和str的转换函数encode（），decode（）
 str通过encode（）编码为指定的bytes
 bytes通过decode（）转换为str
+
+2017.08.28
+http://blog.csdn.net/eric_sunah/article/details/51384116
