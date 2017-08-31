@@ -28,6 +28,10 @@ Redis连接方式有两种，一种是单个的一种是线程池的
 
 线程池有利于连接的复用，可以实现多个实例共用一个连接
 '''
+
+# 项目中对redis的操作必须具体结合xml和message的解析
+# 单个的光说操作没什么意义，因为其操作其实就是那么些动作，顶多加上事务或者是流水线
+
 def get_connect():
     # R = redis.Redis(host='127.0.0.1',port=6379)
     pool = redis.ConnectionPool(host='localhost',port=6379,db=0,password=None)
@@ -36,9 +40,9 @@ def get_connect():
     return r
 
 
-#发现这里有个问题，无论是subscribe还是publish都会有个延时，如果在语句下立即接一个get_message往往会
-#得到一个none，但是如果放的太后也会错过message而得到none
-#这让我觉得redis中使用订阅发布模式或许不是一个很好的选择
+# 发现这里有个问题，无论是subscribe还是publish都会有个延时，如果在语句下立即接一个get_message往往会
+# 得到一个none，但是如果放的太后也会错过message而得到none
+# 这让我觉得redis中使用订阅发布模式或许不是一个很好的选择
 def pub_sub(R):
     # 订阅发布模式
     p = R.pubsub()

@@ -53,16 +53,7 @@ def list_all_dict(dict_to_list):
             print("%s:  %s"%(temp_key,temp_value))
             list_all_dict(temp_value)
             
-def list_dict(dic):
-    if isinstance(dic,dict):
-        for x in dic.keys():
-            
-    print(dic)
-    for x in dic.keys():            
-        if isinstance(dic[x],dict):
-            list_dict(x)
-        else:
-            print(x,": ",dic[x])
+
             
 def dict_index():
     d = {}
